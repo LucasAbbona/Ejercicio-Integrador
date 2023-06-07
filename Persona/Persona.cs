@@ -5,23 +5,24 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Ejercicio_Integrador.Dates;
 
-namespace Ejercicio_Integrador
+namespace Ejercicio_Integrador.Persona
 {
     public class Persona : ISettersAndGetters
     {
-        Fecha FechaDeNacimiento;
-        long identidad;
-        string PrimerApellido;
-        string PrimerNombre;
-        string SegundoApellido;
-        string SegundoNombre;
-        NumeroTelefonico telefonoCasa;
-        NumeroTelefonico telefonoMovil;
-        NumeroTelefonico telefonoOficina;
-        
+        private Fecha FechaDeNacimiento;
+        private long identidad;
+        private string PrimerApellido;
+        private string PrimerNombre;
+        private string SegundoApellido;
+        private string SegundoNombre;
+        private NumeroTelefonico telefonoCasa;
+        private NumeroTelefonico telefonoMovil;
+        private NumeroTelefonico telefonoOficina;
+
         //Methods
-        public void Establecer(long dni, string nombre, string apellido,string segundoNombre,string segundoApellido,Fecha nacimiento, NumeroTelefonico casa, NumeroTelefonico movil, NumeroTelefonico oficina)
+        public void Establecer(long dni, string nombre, string apellido, string segundoNombre, string segundoApellido, Fecha nacimiento, NumeroTelefonico casa, NumeroTelefonico movil, NumeroTelefonico oficina)
         {
             identidad = dni;
             PrimerApellido = apellido;
@@ -43,20 +44,10 @@ namespace Ejercicio_Integrador
             telefonoMovil = movil;
         }
 
-        // Operation Methods
-        public int CalcularEdad(Fecha hoy)
-        {
-            if(hoy.mes > FechaDeNacimiento.mes || (hoy.mes == FechaDeNacimiento.mes && hoy.dia >= FechaDeNacimiento.dia))
-            {
-                return hoy.anio - FechaDeNacimiento.anio;
-            }else
-            {
-                return hoy.anio - FechaDeNacimiento.anio - 1; 
-            }
-        }
+        //Calculo de edad en persona service        
 
         // Setters
-        
+
         public void EstablecerIdentidad(long dni)
         {
             identidad = dni;
@@ -65,13 +56,13 @@ namespace Ejercicio_Integrador
         {
             FechaDeNacimiento = nacimiento;
         }
-        
+
         // Nombres y Apellidos
         public void EstablecerPrimerNombre(string name)
         {
             PrimerNombre = name;
         }
-        public void EstablecerPrimerApellido(string lastname) 
+        public void EstablecerPrimerApellido(string lastname)
         {
             PrimerApellido = lastname;
         }
@@ -134,10 +125,10 @@ namespace Ejercicio_Integrador
         {
             return telefonoOficina;
         }
-        public void Imprimir() 
+        public override string ToString()
         {
-            Console.WriteLine($"Identificacion: {identidad}\n Nombre Completo: {PrimerNombre} {PrimerApellido} {SegundoNombre} {SegundoApellido}\n");
-            Console.WriteLine($"Fecha de Nacimiento:{FechaDeNacimiento}\nTelefonos\nOficina: {telefonoOficina}\nMovil: {telefonoMovil}\nCasa: {telefonoCasa}"); ;
+            return $"Identificacion: {identidad}\n Nombre Completo: {PrimerNombre} {PrimerApellido} {SegundoNombre} {SegundoApellido}\n" +
+                $"Fecha de Nacimiento:{FechaDeNacimiento}\nTelefonos\nOficina: {telefonoOficina}\nMovil: {telefonoMovil}\nCasa: {telefonoCasa}";
         }
     }
 }

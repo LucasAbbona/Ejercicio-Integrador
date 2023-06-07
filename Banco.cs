@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_Integrador
 {
-    public class Banco
+    public class Banco : ISettersAndGetters
     {
-        List<Prestamo> prestamosList = new List<Prestamo>();
-        double Patrimonio;
+        private List<Prestamo.Prestamo> prestamosList = new List<Prestamo.Prestamo>();
+        private double Patrimonio;
         
         //Setters
         public void Establecer(double partrimony)
@@ -38,7 +38,7 @@ namespace Ejercicio_Integrador
         {
             Patrimonio -= monto;
         }
-        public void NuevoPrestamo(Prestamo prestamo)
+        public void NuevoPrestamo(Prestamo.Prestamo prestamo)
         {
             prestamosList.Add(prestamo);
         }
@@ -47,7 +47,7 @@ namespace Ejercicio_Integrador
         public double Prestado()
         {
             double TotalPrestado = 0;
-            foreach(Prestamo prestamo in prestamosList)
+            foreach(Prestamo.Prestamo prestamo in prestamosList)
             {
                 TotalPrestado += prestamo.ObtenerValor();
             }
@@ -57,12 +57,18 @@ namespace Ejercicio_Integrador
         {
             return Patrimonio;                       
         }
-        public void Imprimir()
+        public void Imprimir(int id)
         {
-            foreach(Prestamo prestamos in  prestamosList)
+            try
             {
-                prestamos.Imprimir();
+                Prestamo.Prestamo PrestamoAImprimir = (from prestam in prestamosList where prestam.ObtenerNumeroDeSerie() == id select prestam).First();
+                PrestamoAImprimir.Imprimir();
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            
         }
     }
 }

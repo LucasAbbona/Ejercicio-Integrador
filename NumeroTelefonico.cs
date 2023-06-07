@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_Integrador
 {
-    public class NumeroTelefonico : ISettersAndGetters
+    public class NumeroTelefonico
     {
-        public int codigoArea;
-        public int extension;
-        public int intercambio;
-        public int linea;
+        private int codigoArea;
+        private int extension;
+        private int intercambio;
+        private int linea;
 
         //Setters
         public void Establecer(int codigoArea, int extension, int intercambio, int linea)
@@ -23,9 +23,9 @@ namespace Ejercicio_Integrador
         }
 
         //Getters
-        public void Imprimir()
+        public override string ToString()
         {
-            Console.WriteLine($"Codigo de area: {codigoArea}\n Extension: {extension}\nIntercambio: {intercambio}\nLinea: {linea}");
+            return $"Codigo de area: {codigoArea}\n Extension: {extension}\nIntercambio: {intercambio}\nLinea: {linea}";
         }
 
     }

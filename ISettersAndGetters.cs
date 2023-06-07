@@ -9,6 +9,5 @@ namespace Ejercicio_Integrador
     public interface ISettersAndGetters
     {
         public void Establecer(){}
-        public void Imprimir(){}
     }
 }
